@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1012419548913",
+    "firebase_url": "https://specular-75db0.firebaseio.com",
+    "project_id": "specular-75db0",
+    "storage_bucket": "specular-75db0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012419548913:android:8d95675964665783f7bb50",
+        "android_client_info": {
+          "package_name": "com.specularapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012419548913-3nv0i2q2bh73kut5vb84g187ufpeqv2r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBouIuAZCbZFQUtI1YBrFnoKIrGo01LbDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012419548913-3nv0i2q2bh73kut5vb84g187ufpeqv2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
