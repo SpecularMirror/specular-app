@@ -28,12 +28,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import login from './functions/Login.js';
+import Login from './components/Login';
 
 const App: () => React$Node = () => {
-
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -54,34 +51,7 @@ const App: () => React$Node = () => {
 
   if (!user) {
     return (
-      <View style={styles.body}>
-        <Image source={require('./assets/images/logo.png')} />
-        <Text style={styles.sectionTitle}>Welcome to Specular</Text>
-        <Text style={styles.sectionDescription}>Start logging in or creating an account</Text>
-        <View style={styles.credentials}>
-          <TextInput
-            style={styles.textInput}
-            placeholder={"e-mail"}
-            textContentType={"emailAddress"}
-            onChangeText={(value) => setUsername(value)}
-            value={username}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Password"}
-            textContentType={"password"}
-            secureTextEntry={true}
-            onChangeText={(value) => setPassword(value)}
-            value={password}
-          />
-          <Button
-            onPress={() => login.login(username, password)}
-            title="Login"
-            color="#841584"
-            accessibilityLabel="Login"
-          />
-        </View>
-      </View>
+      <Login />
     );
   }
 
@@ -94,7 +64,7 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.red,
     alignContent: 'center',
     display: 'flex',
     alignItems: 'center',
@@ -125,6 +95,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  signup: {
+    backgroundColor: Colors.white
   }
 });
 
