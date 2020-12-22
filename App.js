@@ -29,6 +29,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Login from './components/Login';
+import Home from './pages/Home';
 
 const App: () => React$Node = () => {
 
@@ -56,9 +57,7 @@ const App: () => React$Node = () => {
   }
 
   return (
-    <View>
-      <Text>Welcome {user.email}</Text>
-    </View>
+    <Home />
   );
 };
 
