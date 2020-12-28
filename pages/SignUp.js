@@ -1,5 +1,6 @@
 import React from 'react';
 import auth from '@react-native-firebase/auth';
+import Login from '../functions/Signin';
 import {useState, useEffect} from "react";
 
 import {
@@ -34,7 +35,7 @@ return (
     <View style={styles.body}>
         <Image source={require('../assets/images/logo.png')} />
         <Text style={styles.sectionTitle}>Welcome to Specular</Text>
-        <Text style={styles.sectionDescription}>Start logging in or creating an account</Text>
+        <Text style={styles.sectionDescription}>Create an account now!</Text>
         <View style={styles.credentials}>
           <TextInput
             style={styles.textInput}
@@ -47,7 +48,6 @@ return (
             style={styles.textInput}
             placeholder={"Surname"}
             textContentType={"surname"}
-            secureTextEntry={true}
             onChangeText={(value) => setSurname(value)}
             value={surname}
           />
@@ -74,15 +74,11 @@ return (
             value={password}
           />
           <Button
-            onPress={() => login.login(username, password)}
-            title="Login"
+            onPress={() => Login.signin(username, password,name,surname,dob)}
+            title="Sign up"
             color="#841584"
             accessibilityLabel="Login"
           />
-        </View>
-
-        <View style={styles.signup}>
-          <Text>Not a member?</Text>
         </View>
       </View>
     )

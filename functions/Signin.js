@@ -1,10 +1,21 @@
 import auth from '@react-native-firebase/auth';
+import { Actions } from 'react-native-router-flux';
+import firestore from '@react-native-firebase/firestore';
 
-function signin(username, password) {
+class Signin{
+ signin(username, password,name,surname,dob) {
     auth()
     .createUserWithEmailAndPassword(username, password)
-    .then(() => {
-        console.log('User account created & signed in!');
+    .then(user => {
+        console.log('leggi qui'+user.user.uid);
+        firestore().collection('users').doc(user.user.uid).set({
+            name: name,
+            surname: surname,
+            dob: dob,
+            image: 'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png'
+        }).then((doc)=>{ 
+            Actions.Home();
+            })
     })
     .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -18,4 +29,6 @@ function signin(username, password) {
         console.error(error);
     });
 }
+}
+const signin = new Signin();
 export default signin;

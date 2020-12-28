@@ -58,6 +58,7 @@ const App: () => React$Node = () => {
         <Scene key="root">
         <Scene key="login" component={Login} title="Login" />
         <Scene key="signUp" component={Signup} title="Sign up" />
+        <Scene key="Home" component={Home}/>
         </Scene>
     </Router>
     );
