@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import NavBar from '../components/NavBar';
+import Mirror from '../components/Mirror';
 import auth from '@react-native-firebase/auth';
 
 export default class Home extends Component {
@@ -15,6 +16,7 @@ export default class Home extends Component {
         return (
             <>
             <NavBar />
+            <Mirror />
             <Button
             onPress={() => auth().signOut().then(() => console.log('User signed out!'))}
             title="Logout"

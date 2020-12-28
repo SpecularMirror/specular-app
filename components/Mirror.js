@@ -12,9 +12,11 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const NavBar: () => React$Node = () => {
+const Mirror: () => React$Node = () => {
 
+    const [name, setName] = useState();
     const [image, setImage] = useState();
+    const [status, setStatus] = useState();
 
     // Set an initializing state whilst Firebase connects
     const [initializing, setInitializing] = useState(true);
@@ -32,44 +34,46 @@ const NavBar: () => React$Node = () => {
     }, []);
     if (initializing) return null;
 
-    firestore().collection('users').doc(user.uid)
-          .get()
-          .then((doc)=>{ 
-                  setImage(doc.data().image)
-          })
-          .catch(e => console.log(e));
+    firestore().collection('users').doc(user.uid).get().then((doc)=>{ 
+        setName(doc.data().name);
+        firestore().collection('mirrors').doc(doc.data().mirrorID).get().then((document)=>{ 
+            setStatus(document.data().status)
+            setImage(document.data().image)
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(e => console.log(e));
 
 
     return (
-        <View style={styles.navBar}>
-            <Text style={styles.navTitle}>Home</Text>
+        <View style={styles.mirrorContainer}>
+            <Text style={styles.mirrorTitle}>{name}'s Specular</Text>
+            <Text>{status}</Text>
             <Image source={{uri: image}} 
-            style={styles.profilePic}/>
+            style={styles.mirrorPic}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    profilePic: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        marginTop: 3
-    },
-    navTitle: {
-        color: Colors.black,
-        fontWeight: 'bold',
-        fontSize: 30
-    },
-    navBar: {
+    mirrorContainer: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        alignItems: 'center',
+    justifyContent: 'center',
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
         paddingLeft: 10
+    },
+    mirrorTitle: {
+        fontWeight: "600",
+        fontSize: 25
+    },
+    mirrorPic: {
+        width: "70%",
+        height: 275
     }
 });
 
-export default NavBar;
+export default Mirror;
