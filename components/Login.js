@@ -10,6 +10,7 @@ import {
   TextInput,
   Image,
   Button,
+  ActionSheetIOS,
 } from 'react-native';
 
 import {
@@ -21,6 +22,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import login from '../functions/Login.js';
+import {Actions} from 'react-native-router-flux';
+
 
 const Login: () => React$Node = () => {
 
@@ -57,7 +60,8 @@ return (
         </View>
 
         <View style={styles.signup}>
-          <Text>Not a member?</Text>
+          <Text>Not a member?</Text> 
+          <Button onPress={() => Actions.signUp()} title= "Sign up!" color="#841584"/>
         </View>
       </View>
     )

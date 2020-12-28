@@ -30,6 +30,8 @@ import {
 
 import Login from './components/Login';
 import Home from './pages/Home';
+import Signup from './pages/SignUp';
+import { Router, Scene } from 'react-native-router-flux';
 
 const App: () => React$Node = () => {
 
@@ -52,7 +54,12 @@ const App: () => React$Node = () => {
 
   if (!user) {
     return (
-      <Login />
+      <Router>
+        <Scene key="root">
+        <Scene key="login" component={Login} title="Login" />
+        <Scene key="signUp" component={Signup} title="Sign up" />
+        </Scene>
+    </Router>
     );
   }
 
