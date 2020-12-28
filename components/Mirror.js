@@ -48,7 +48,17 @@ const Mirror: () => React$Node = () => {
     return (
         <View style={styles.mirrorContainer}>
             <Text style={styles.mirrorTitle}>{name}'s Specular</Text>
-            <Text>{status}</Text>
+            <View style={styles.mirrorStatusCont}>
+                <View style={styles.statusCircle} />
+                { status === 'running' ? (
+                    <View style={styles.statusCircle} backgroundColor={'#008000'} />
+                    ) : status === 'refresh' ? (
+                        <View style={styles.statusCircle} backgroundColor={'#FFFF00'} />
+                    ) : status === 'turned off' && (
+                        <View style={styles.statusCircle} backgroundColor={'#FF0000'} />
+                    )}
+                <Text style={styles.mirrorStatus}>{status}</Text>
+            </View>
             <Image source={{uri: image}} 
             style={styles.mirrorPic}/>
         </View>
@@ -60,7 +70,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-    justifyContent: 'center',
+        justifyContent: 'center',
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
@@ -68,11 +78,27 @@ const styles = StyleSheet.create({
     },
     mirrorTitle: {
         fontWeight: "600",
-        fontSize: 25
+        fontSize: 25,
+        marginTop: 30,
     },
     mirrorPic: {
         width: "70%",
-        height: 275
+        height: 275,
+        marginTop: 30,
+    },
+    mirrorStatus: {
+        marginTop: 5
+    },
+    mirrorStatusCont: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    statusCircle: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        marginTop: 12,
+        marginRight: 5
     }
 });
 
