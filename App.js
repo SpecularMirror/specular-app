@@ -68,7 +68,7 @@ const App: () => React$Node = () => {
   return (
     <Router>
     <Scene key="root">
-    <Scene key="Home" component={Home}/>
+    <Scene key="Home" component={Home} hideNavBar={true}/>
     <Scene key="Profile" component={Profile}/>
     </Scene>
 </Router>

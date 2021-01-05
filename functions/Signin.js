@@ -3,16 +3,16 @@ import { Actions } from 'react-native-router-flux';
 import firestore from '@react-native-firebase/firestore';
 
 class Signin{
- signin(username, password,name,surname,dob) {
+ signin(email, password,name,surname,dob) {
     auth()
-    .createUserWithEmailAndPassword(username, password)
+    .createUserWithEmailAndPassword(email, password)
     .then(user => {
-        console.log('leggi qui'+user.user.uid);
         firestore().collection('users').doc(user.user.uid).set({
             name: name,
             surname: surname,
             dob: dob,
-            image: 'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png'
+            image: 'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png',
+            email: email
         }).then((doc)=>{ 
             Actions.Home();
             })

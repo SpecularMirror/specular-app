@@ -25,7 +25,7 @@ import {
 
 const SignUp: () => React$Node = () => {
 
-    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [name, setName] = useState();
     const [surname, setSurname] = useState();
@@ -62,8 +62,8 @@ return (
             style={styles.textInput}
             placeholder={"e-mail"}
             textContentType={"emailAddress"}
-            onChangeText={(value) => setUsername(value)}
-            value={username}
+            onChangeText={(value) => setEmail(value)}
+            value={email}
           />
           <TextInput
             style={styles.textInput}
@@ -74,7 +74,7 @@ return (
             value={password}
           />
           <Button
-            onPress={() => Login.signin(username, password,name,surname,dob)}
+            onPress={() => Login.signin(email, password,name,surname,dob,)}
             title="Sign up"
             color="#841584"
             accessibilityLabel="Login"
