@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {useState, useEffect} from "react";
 import {
   StyleSheet,
@@ -7,10 +6,13 @@ import {
   Text,
   Image,
   StatusBar,
+  Button,
+  TouchableOpacity
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Actions } from 'react-native-router-flux';
 
 const NavBar: () => React$Node = () => {
 
@@ -43,9 +45,12 @@ const NavBar: () => React$Node = () => {
     return (
         <View style={styles.navBar}>
             <Text style={styles.navTitle}>Home</Text>
+            <TouchableOpacity onPress={() => Actions.Profile()}>
             <Image source={{uri: image}} 
             style={styles.profilePic}/>
+                 </TouchableOpacity>
         </View>
+
     )
 }
 
