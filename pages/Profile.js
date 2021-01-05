@@ -15,15 +15,23 @@ export default class Profile extends Component {
         return (
             <>
             <ProfileInfo />
-            <Button
+            <Button style={styles.button}
             title="My Specular Account"
-            color="#841584"
+            color="grey"
             accessibilityLabel="AccountInfo"
           />
-          <Button
+          
+          <Button style={styles.button} 
             title="Sync and Devices"
-            color="#841584"
+            color="grey"
             accessibilityLabel="Device"
+          />
+
+          <Button
+            onPress={() => auth().signOut().then(() => console.log('User signed out!'))}
+            title="Logout"
+            color="grey"
+            accessibilityLabel="Login"
           />
           </>
         )
@@ -31,4 +39,10 @@ export default class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    fontWeight: "600",
+    color: 'black',
+    fontSize: 20,
+    marginTop: 1,
+}
 });
