@@ -47,9 +47,9 @@ const ProfileInfo: () => React$Node = () => {
     return (
         <View style={styles.mirrorContainer}>
               <Image source={{uri: image}} 
-            style={styles.mirrorPic}/>
-            <Text style={styles.mirrorTitle}>{name} {surname}</Text>
-            <Text style={styles.mirrorTitle}>{email}</Text>
+            style={styles.profilePic}/>
+            <Text style={styles.nameTitle}>{name} {surname}</Text>
+            <Text style={styles.emailTitle}>{email}</Text>
         </View>
     )
 }
@@ -65,29 +65,24 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingLeft: 10
     },
-    mirrorTitle: {
+    nameTitle: {
         fontWeight: "600",
-        fontSize: 25,
+        color: 'black',
+        fontSize: 30,
         marginTop: 30,
     },
-    mirrorPic: {
-        width: "70%",
-        height: 275,
-        marginTop: 30,
+    emailTitle: {
+        fontWeight: "600",
+        color: '#707070',
+        fontSize: 20,
+        marginTop: 1,
     },
-    mirrorStatus: {
-        marginTop: 5
-    },
-    mirrorStatusCont: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    statusCircle: {
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-        marginTop: 12,
-        marginRight: 5
+    profilePic: {
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        borderWidth: 5,
+        borderColor: '#69F0AE',
     }
 });
 
