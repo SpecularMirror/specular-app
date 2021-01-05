@@ -17,6 +17,12 @@ export default class Home extends Component {
             <>
             <NavBar />
             <Mirror />
+            <Button
+            onPress={() => auth().signOut().then(() => console.log('User signed out!'))}
+            title="Logout"
+            color="#841584"
+            accessibilityLabel="Login"
+          />
           </>
         )
     }
