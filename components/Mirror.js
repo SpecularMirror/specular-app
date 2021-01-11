@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Actions } from 'react-native-router-flux';
 
 const Mirror: () => React$Node = () => {
 
@@ -37,13 +37,14 @@ const Mirror: () => React$Node = () => {
     if (initializing) return null;
 
     firestore().collection('users').doc(user.uid).get().then((doc)=>{ 
-        setName(doc.data().name);
-        setMirror(doc.data().mirrorID);
+        if(doc.data().name !== undefined) { setName(doc.data().name) }
+        if(doc.data().mirrorID !== undefined) { setMirror(doc.data().mirrorID) }
         firestore().collection('mirrors').doc(doc.data().mirrorID).get().then((document)=>{ 
-            setImage(document.data().image)
+            if(document.data().image !== undefined) { setImage(document.data().image) }
         })
         firestore().collection('mirrors').doc(doc.data().mirrorID).onSnapshot(function(snap) {
-            setStatus(snap.data().status)
+            if(snap.data() !== undefined)
+                if(snap.data().status !== undefined) { setStatus(snap.data().status) }
         })
     })
 
@@ -52,7 +53,7 @@ const Mirror: () => React$Node = () => {
         <View style={styles.mirrorContainer}>
             <Text style={styles.mirrorTitle}>{name}'s Specular</Text>
             <View style={styles.mirrorStatusCont}>
-                <View style={styles.statusCircle} />
+                <View style={styles.statusCircle}/>
                 { status === 'running' ? (
                     <View style={styles.statusCircle} backgroundColor={'#008000'} />
                     ) : status === 'refresh' ? (
@@ -64,10 +65,18 @@ const Mirror: () => React$Node = () => {
                     )}
                 <Text style={styles.mirrorStatus}>{status}</Text>
             </View>
+            { mirrorID === undefined && (
+                    <Button
+                    onPress={() => Actions.AddMirror() }
+                    title="NEW MIRROR"
+                    color="#841584"
+                    accessibilityLabel="NEW MIRROR"
+                    />
+                )}
             <Image source={{uri: image}} 
             style={styles.mirrorPic}/>
             <View>
-                <TouchableOpacity  style={styles.turOff}
+                <Button
                 onPress={() => status === 'running' ? (
                     firestore().collection('mirrors').doc(mirrorID).set({ status: 'turned off'}, { merge: true })
                     ) : status === 'sleep mode' ? (
@@ -75,9 +84,10 @@ const Mirror: () => React$Node = () => {
                     ) : status === 'turned off' && (
                         firestore().collection('mirrors').doc(mirrorID).set({ status: 'running'}, { merge: true })
                     )}
-                >
-                    <Image source={require('../assets/images/shutdown.png')}/>
-                </TouchableOpacity>
+                title="TURN ON"
+                color="#841584"
+                accessibilityLabel="Turn Off"
+                />
                 <Button
                 onPress={() => status === 'running' ? (
                     firestore().collection('mirrors').doc(mirrorID).set({ status: 'sleep mode'}, { merge: true })

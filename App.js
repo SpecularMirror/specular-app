@@ -33,6 +33,7 @@ import Home from './pages/Home';
 import Signup from './pages/SignUp';
 import { Router, Scene } from 'react-native-router-flux';
 import Profile from './pages/Profile';
+import AddMirror from './pages/AddMirror';
 
 const App: () => React$Node = () => {
 
@@ -70,6 +71,7 @@ const App: () => React$Node = () => {
     <Scene key="root">
     <Scene key="Home" component={Home} hideNavBar={true}/>
     <Scene key="Profile" component={Profile}/>
+    <Scene key="AddMirror" component={AddMirror}/>
     </Scene>
 </Router>
 
