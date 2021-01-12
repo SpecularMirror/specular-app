@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Linking
 } from 'react-native';
+import {useState, useEffect} from "react";
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import auth from '@react-native-firebase/auth';
@@ -31,6 +32,7 @@ const AddMirror: () => React$Node = () => {
 
   function onSuccess(e) {
     firestore().collection('users').doc(user.user.uid).set({ mirrorID: e.data}, { merge: true }).then((doc)=>{ 
+      console.log(e.data)
       Actions.Home();
     })
   }
