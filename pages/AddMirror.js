@@ -18,7 +18,7 @@ const AddMirror: () => React$Node = () => {
   const [user, setUser] = useState();
 
   // Handle user state changes
-  onAuthStateChanged = user => {
+  function onAuthStateChanged(user) {
       setUser(user);
       if (initializing) setInitializing(false);
   }
@@ -29,11 +29,11 @@ const AddMirror: () => React$Node = () => {
   }, []);
   if (initializing) return null;
 
-  onSuccess = e => {
+  function onSuccess(e) {
     firestore().collection('users').doc(user.user.uid).set({ mirrorID: e.data}, { merge: true }).then((doc)=>{ 
       Actions.Home();
     })
-  };
+  }
     
     return (
       <QRCodeScanner
@@ -54,7 +54,7 @@ const AddMirror: () => React$Node = () => {
         />
         );
       }
-    }
+    
     
     const styles = StyleSheet.create({
       centerText: {
