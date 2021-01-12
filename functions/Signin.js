@@ -15,7 +15,7 @@ class Signin{
             email: email
         }).then((doc)=>{ 
             Actions.Home();
-            })
+        })
     })
     .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
