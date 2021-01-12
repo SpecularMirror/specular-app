@@ -39,7 +39,7 @@ const AddMirror: () => React$Node = () => {
     
     return (
       <QRCodeScanner
-        onRead={this.onSuccess}
+        onRead={onSuccess}
         flashMode={RNCamera.Constants.FlashMode.torch}
         topContent={
           <Text style={styles.centerText}>
