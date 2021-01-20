@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ImagePicker from 'react-native-image-picker';
 import {useState, useEffect} from "react";
 import {
   StyleSheet,
@@ -7,10 +7,13 @@ import {
   Text,
   Image,
   StatusBar,
+  SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const ProfileInfo: () => React$Node = () => {
 
@@ -43,14 +46,32 @@ const ProfileInfo: () => React$Node = () => {
     })
     .catch(e => console.log(e));
 
+changeImage = () => {
+    const options = {
+        quality:0.7,allowsEditing:true, mediaType:'photo', noData:true,
+        storageOptions:{
+            skipBackup: true, waitUntilSaved: true, path: 'images', cameraRoll:true
+        }
+    }
+    ImagePicker.showImagePicker(options, response => {
+        if(response.error){
+            console.log(error)
+        }else if (!response.didCancel){
+            this.setState({
+                imageSource: {uri: response.uri}
+            })
+        }
+    })
+}
 
     return (
-        <View style={styles.mirrorContainer}>
-              <Image source={{uri: image}} 
-            style={styles.profilePic}/>
+        <SafeAreaView style={styles.mirrorContainer}>
+            <TouchableOpacity onPress={this.changeImage}>
+              <Image source={{uri: image}} style={styles.profilePic}/>
+            </TouchableOpacity>
             <Text style={styles.nameTitle}>{name} {surname}</Text>
             <Text style={styles.emailTitle}>{email}</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
